@@ -38,16 +38,6 @@ namespace LinearProfile {
         this->distance_target = idistance; 
     }
 
-    /*
-    ProfileConstraint::ProfileConstraint(float maxVel, float maxAccel, float maxJerk, float idistance) {
-    
-        this->maxVelocity = abs(maxVel);
-        this->maxAcceleration =abs(maxAccel);
-        this->maxDeceleration = abs(maxAccel);
-        this->maxJerk = abs(maxJerk);
-        this->distance_target = idistance; 
-    }*/
-
     TrapezoidalMotionProfile::TrapezoidalMotionProfile() {
 
     }
@@ -384,4 +374,7 @@ namespace LinearProfile {
 
         return isReversed ? -acc : acc;
     }
+
+
 }
+

@@ -130,7 +130,7 @@ namespace MyApp
 {
     //Kinemactics
     float Velocity = 0.0f;
-    float Acceleration = 0.0f;
+    float Acceleration = 0.5f;
     float Desacceleration = 0.0f; 
     float Jerk = 0.0f;
     float iDiameter = 1; 
@@ -471,9 +471,12 @@ namespace MyApp
        
         ImGui::Text("Kinemactic Values [m/s]");
         ImGui::DragFloat("Velocity[m/s]", &Velocity);
+        ImGui::Text("Acceleration can not be 0");
         ImGui::DragFloat("Acceleration", &Acceleration);
         ImGui::DragFloat("Desacceleration", &Desacceleration); 
+        ImGui::Text("Jerk 0 for Trapezoidal");
         ImGui::DragFloat("Jerk", &Jerk);
+
 
         //Calculations stuffs
         ImGui::Text("Profile Inputs");
@@ -487,6 +490,10 @@ namespace MyApp
 
         if (profiler == 0) {
             Jerk = 0.0f;
+        }
+
+        if (Acceleration == 0) {
+                Acceleration = .1;
         }
 
         ImGui::Text("");
@@ -574,8 +581,8 @@ namespace MyApp
 
     void RenderTable() {
 
-        if (ImGui::BeginTable("Profile Simulation", 5, ImGuiTableFlags_Resizable))
-        {
+            ImGui::BeginTable("Profile Simulation", 5, ImGuiTableFlags_Resizable);
+        
             // Submit columns name with TableSetupColumn() and call TableHeadersRow() to create a row with a header in each column.
             // (Later we will show how TableSetupColumn() has other uses, optional flags, sizing weight etc.)
             ImGui::TableSetupColumn("Time [sec]");
@@ -607,7 +614,7 @@ namespace MyApp
                    
             }
             ImGui::EndTable();
-        }
+        
 
         if (ImGui::Button("Download table")) {
             csv_file_path= ShowSaveFileDialog(CSV);
@@ -631,9 +638,7 @@ namespace MyApp
 
         if (ImGui::BeginTabItem("Data"))
         {
-            
             RenderTable();
-
             ImGui::EndTabItem();
         }
 
