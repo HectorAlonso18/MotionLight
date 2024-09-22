@@ -9,7 +9,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'MotionLight',
-  tagline: 'An spellbinding Lineal Motion profile generator',
+  tagline: 'Lineal Motion profile generator',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
