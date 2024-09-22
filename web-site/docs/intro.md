@@ -2,46 +2,50 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# MotionLight
 
-Let's discover **Docusaurus in less than 5 minutes**.
+**MotionLight** is a light ``C++`` application developed using ``Dear ImGui`` to simulate and generate lineal motion profiles. Just like Trapezoidal and S-Curve profilers. 
 
-## Getting Started
+>Motion control engineers spend hours optimizing tuning parameters for their servo-based motion controllers. But what if they are using step motors? And what if, no matter how much time they spend on tuning, they can’t get the performance they want?
+>The answer, for many motor and control systems, is to focus on the motion profile instead.
 
-Get started by **creating a new site**.
+On the other hand, with **MotionLight** you can create written ``.txt`` files, where you can use those files to implement the created motion profiles for you specific application.   
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+:::note
+At this moment, MotionLight is just available for Windows. 
+:::
+---
 
-### What you'll need
+## Features
+* Trapezoidal and S-Curve Profile generator. 
+* Visual graphics. 
+* Data representation. 
+* Light and fast application. 
+* Compatible with the Vex template [Lightning](https://hectoralonso18.github.io/Lightninglib/docs/intro). 
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+---
 
-## Generate a new site
+## Development
+``MotionLight`` is develop by [Héctor Alonso](https://www.linkedin.com/in/hector-alonso-ibarra-012b51196/), creator of [Lightning](https://hectoralonso18.github.io/Lightninglib/docs/intro).
 
-Generate a new Docusaurus site using the **classic template**.
+---
 
-The classic template will automatically be added to your project after you run the command:
+## Installation
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+---
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+## Tutorials
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+---
 
-## Start your site
+## Future Work
+I am hoping to introduce more lineal motion profiles, also creating a stable version of MotionLight in Linux and MacOs. 
 
-Run the development server:
+---
 
-```bash
-cd my-website
-npm run start
-```
+## Do you found a bug  🐛? 
+Feel free to email me at ``hector_alonso_ibarra@outlook.com``. Or open a github issue on the [github repository](https://github.com/HectorAlonso18/MotionLight/issues) 
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+---
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+## License
