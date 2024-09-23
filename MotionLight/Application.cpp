@@ -214,13 +214,13 @@ namespace MyApp
         if (std::getline(file,line)){
             std::istringstream iss(line);
             std::string token;
-            std::vector<double> parameters;
+            std::vector<float> parameters;
 
             while (std::getline(iss, token, ',')) {
-                parameters.push_back(std::stod(token));
+                parameters.push_back(static_cast<float>(std::stod(token)));
             }
 
-            profiler = parameters[0];
+            profiler = static_cast<int>(parameters[0]);
             Velocity = parameters[1];
             Acceleration = parameters[2];
             Desacceleration = parameters[3];
@@ -315,14 +315,14 @@ namespace MyApp
         }
         total_time = Profile.getTotalTime();
         pos.push_back(Distance);
-        vel.push_back(0);
-        accel.push_back(0);
+        vel.push_back(0.0f);
+        accel.push_back(0.0f);
         time_vector.push_back(total_time); 
-        vel_axis_max = max_velocity + 1;
-        vel_axis_min = min_velocity - 1;
+        vel_axis_max = max_velocity + 1.0f;
+        vel_axis_min = min_velocity - 1.0f;
 
-        accel_axis_max = max_acceleration + 1;
-        accel_axis_min = max_acceleration - 3;
+        accel_axis_max = max_acceleration + 1.0f;
+        accel_axis_min = max_acceleration - 3.0f;
     }
 
     void ConversionCalculator() {
@@ -334,16 +334,32 @@ namespace MyApp
         {
             ImGui::Text("From:");
             
-            ImGui::DragFloat(" ", &my_calculator.raw_length); //ImGui::SameLine();
+            ImGui::PushItemWidth(ImGui::GetWindowWidth() * .25f);
+
+            ImGui::DragFloat(" ", &my_calculator.raw_length); ImGui::SameLine();
             const char* items[] = { "Centimeter", "Kilometer", "Yard", "Mile", "Foot", "Inch"};
             static int item_current = 0;
-            ImGui::ListBox("", &item_current, items, IM_ARRAYSIZE(items), 4);
+            const char* combo_preview_value = items[item_current];
+
+            if (ImGui::BeginCombo("Length Unit", combo_preview_value, ImGuiComboFlags_WidthFitPreview)) {
+                for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+                {
+                    const bool is_selected = (item_current == n);
+                    if (ImGui::Selectable(items[n], is_selected))
+                        item_current = n;
+
+                    // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
+
             my_calculator.ConvertLength(static_cast <LengthUnits>(item_current));
+            render_a_space(1);
 
-            render_a_space(2);
-
-            ImGui::Text("To [Meters]: ");
-            ImGui::DragFloat("  ",&my_calculator.length);
+            ImGui::Text("To:");
+            ImGui::DragFloat("Meters",&my_calculator.length);
             my_calculator.PopLength(static_cast<LengthUnits>(item_current)); 
             ImGui::EndTabItem();
         }
@@ -351,18 +367,32 @@ namespace MyApp
         if (ImGui::BeginTabItem("Time"))
         {
             ImGui::Text("From:");
-            ImGui::DragFloat("   ", &my_calculator.raw_time); //ImGui::SameLine();
+            ImGui::PushItemWidth(ImGui::GetWindowWidth() * .25f);
+            ImGui::DragFloat(" ", &my_calculator.raw_time); ImGui::SameLine();
           
             const char* items[] = { "Millis", "Minutes","Hours"};
             static int item_current = 0;
-            ImGui::ListBox("", &item_current, items, IM_ARRAYSIZE(items), 3);
+            const char* combo_preview_value = items[item_current];
+
+            if (ImGui::BeginCombo("Time Unit", combo_preview_value, ImGuiComboFlags_WidthFitPreview)) {
+                for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+                {
+                    const bool is_selected = (item_current == n);
+                    if (ImGui::Selectable(items[n], is_selected))
+                        item_current = n;
+
+                    // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
             my_calculator.ConvertTime(static_cast <TimeUnits>(item_current));
   
-            render_a_space(2);
-            ImGui::Text("To [Seconds]: ");
-            ImGui::DragFloat("    ", &my_calculator.time);
+            render_a_space(1);
+            ImGui::Text("To:");
+            ImGui::DragFloat("Seconds", &my_calculator.time);
             my_calculator.PopTime(static_cast<TimeUnits>(item_current));
-            //ImGui::Text(time_conversion);
             
             ImGui::EndTabItem();
         }
@@ -370,17 +400,32 @@ namespace MyApp
         if (ImGui::BeginTabItem("Velocity"))
         {
             ImGui::Text("From:");
-            ImGui::DragFloat("     ", &my_calculator.raw_velocity); //ImGui::SameLine();
+            ImGui::PushItemWidth(ImGui::GetWindowWidth() * .25f);
+            ImGui::DragFloat("  ", &my_calculator.raw_velocity); ImGui::SameLine();
 
             const char* items[] = { "cm/s", "yards/s","ft/s","in/s","km/hr","Mph"};
     
             static int item_current = 0;
-            ImGui::ListBox("", &item_current, items, IM_ARRAYSIZE(items), 3);
+            const char* combo_preview_value = items[item_current];
+
+            if (ImGui::BeginCombo("Velocity Unit", combo_preview_value, ImGuiComboFlags_WidthFitPreview)) {
+                for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+                {
+                    const bool is_selected = (item_current == n);
+                    if (ImGui::Selectable(items[n], is_selected))
+                        item_current = n;
+
+                    // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
             my_calculator.ConvertVelocity(static_cast <VelocityUnits>(item_current));
 
-            render_a_space(2);
-            ImGui::Text("To [m/s]: ");
-            ImGui::DragFloat("      ", &my_calculator.velocity);
+            render_a_space( 1);
+            ImGui::Text("To: ");
+            ImGui::DragFloat("m/s", &my_calculator.velocity);
             my_calculator.PopVelocity(static_cast<VelocityUnits>(item_current)); 
            
             ImGui::EndTabItem();
@@ -388,34 +433,61 @@ namespace MyApp
 
         if (ImGui::BeginTabItem("Angular")) {
             ImGui::Text("From:");
-            ImGui::DragFloat("Angular Velocity", &my_calculator.raw_angular_velocity);
+            ImGui::PushItemWidth(ImGui::GetWindowWidth() * .25f);
+            ImGui::DragFloat("  ", &my_calculator.raw_angular_velocity); ImGui::SameLine();
 
             const char* items[] = { "RPM", "rad/s","deg/s" };
 
             static int item_current = 0;
-            ImGui::ListBox("", &item_current, items, IM_ARRAYSIZE(items), 3);
+            const char* combo_preview_value = items[item_current];
+
+            if (ImGui::BeginCombo("Angular Velocity Unit", combo_preview_value, ImGuiComboFlags_WidthFitPreview)) {
+                for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+                {
+                    const bool is_selected = (item_current == n);
+                    if (ImGui::Selectable(items[n], is_selected))
+                        item_current = n;
+
+                    // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
             my_calculator.ConvertRPMtoMS(static_cast<AngularUnits>(item_current),rpm_calculator.length);
 
-            ImGui::DragFloat("Diameter", &rpm_calculator.raw_length);
+            //////////
+            ImGui::DragFloat("    ", &rpm_calculator.raw_length); ImGui::SameLine();
         
             const char* items_diameter[] = {"Centimeter", "Kilometer", "Yard", "Mile", "Foot", "Inch", "Meter"};
 
             static int item_current_diameter = 0;
 
-            ImGui::ListBox("*", &item_current_diameter, items_diameter, IM_ARRAYSIZE(items_diameter), 2);
+            const char* combo_preview_value_diameter = items_diameter[item_current_diameter];
+
+            if (ImGui::BeginCombo("Diameter unit", combo_preview_value_diameter, ImGuiComboFlags_WidthFitPreview)) {
+                for (int n = 0; n < IM_ARRAYSIZE(items_diameter); n++)
+                {
+                    const bool is_selected = (item_current_diameter == n);
+                    if (ImGui::Selectable(items_diameter[n], is_selected))
+                        item_current_diameter = n;
+
+                    // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
+
             rpm_calculator.ConvertLength(static_cast <LengthUnits>(item_current_diameter));
 
 
             //---
-            const char* items_velocity[] = { "cm/s", "yards/s","ft/s","in/s","km/hr","Mph" };
-
-            static int item_current_velocity = 0;
-
             static char angular_conversion[32];
             snprintf(angular_conversion, 32, "%.6f", my_calculator.velocity);
-
+            
             render_a_space(1);
-            ImGui::Text(angular_conversion);            
+            ImGui::Text(angular_conversion);  ImGui::SameLine();  ImGui::Text(" m/s");
 
             ImGui::EndTabItem(); 
         }
@@ -423,17 +495,34 @@ namespace MyApp
         if (ImGui::BeginTabItem("Acceleration"))
         {
             ImGui::Text("From:");
-            ImGui::DragFloat("    ", &my_calculator.raw_acceleration); //ImGui::SameLine();
+            ImGui::PushItemWidth(ImGui::GetWindowWidth() * .25f);
+            ImGui::DragFloat("    ", &my_calculator.raw_acceleration); ImGui::SameLine();
 
             const char* items[] = { "cm/s2", "yards/s2","ft/s2","in/s2","km/hr2","Mph2" };
 
             static int item_current = 0;
-            ImGui::ListBox("", &item_current, items, IM_ARRAYSIZE(items), 3);
+            
+            const char* combo_preview_value = items[item_current];
+
+            if (ImGui::BeginCombo("Acceleration Unit", combo_preview_value, ImGuiComboFlags_WidthFitPreview)) {
+                for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+                {
+                    const bool is_selected = (item_current == n);
+                    if (ImGui::Selectable(items[n], is_selected))
+                        item_current = n;
+
+                    // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
+
             my_calculator.ConvertAccel(static_cast <AccelerationUnits>(item_current));
-     
-            render_a_space(2);
-            ImGui::Text("To [m/s2]: ");
-            ImGui::DragFloat("       ", &my_calculator.acceleration);
+      
+            render_a_space(1);
+            ImGui::Text("To:");
+            ImGui::DragFloat("m/s2", &my_calculator.acceleration);
             my_calculator.PopAccel(static_cast<AccelerationUnits>(item_current));
 
             ImGui::EndTabItem();
@@ -442,19 +531,32 @@ namespace MyApp
         if (ImGui::BeginTabItem("Jerk"))
         {
             ImGui::Text("From:");
-            ImGui::DragFloat("     ", &my_calculator.raw_jerk); //ImGui::SameLine();
+            ImGui::DragFloat("     ", &my_calculator.raw_jerk); ImGui::SameLine();
 
             const char* items[] = { "cm/s3", "yards/s3","ft/s3","in/s3"};
 
             static int item_current = 0;
-            ImGui::ListBox("", &item_current, items, IM_ARRAYSIZE(items), 3);
-            my_calculator.ConvertJerk(static_cast <JerkUnits>(item_current));
-            static char jerk_conversion[32];
-            snprintf(jerk_conversion, 32, "%.5f", my_calculator.jerk);
+            const char* combo_preview_value = items[item_current];
 
-            render_a_space(2);
-            ImGui::Text("To [m/s3]: ");
-            ImGui::DragFloat("        ", &my_calculator.jerk);
+            if (ImGui::BeginCombo("Jerk Unit", combo_preview_value, ImGuiComboFlags_WidthFitPreview)) {
+                for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+                {
+                    const bool is_selected = (item_current == n);
+                    if (ImGui::Selectable(items[n], is_selected))
+                        item_current = n;
+
+                    // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
+
+            my_calculator.ConvertJerk(static_cast <JerkUnits>(item_current));
+ 
+            render_a_space(1);
+            ImGui::Text("To:");
+            ImGui::DragFloat("m/s3", &my_calculator.jerk);
             my_calculator.PopJerk(static_cast<JerkUnits>(item_current));
 
             ImGui::EndTabItem();
@@ -468,7 +570,6 @@ namespace MyApp
     void RenderParametersView() {
         
         ImGui::Begin("Configuration");
-       
         ImGui::Text("Kinemactic Values [m/s]");
         ImGui::DragFloat("Velocity[m/s]", &Velocity);
         ImGui::Text("Acceleration can not be 0");
@@ -483,21 +584,25 @@ namespace MyApp
         ImGui::DragFloat("Distance [m]", &Distance);
         ImGui::DragFloat("Sample Time [s]", &SampleTime);
 
+        ImGui::Separator();
         ImGui::Text("Profilers");
       
         ImGui::RadioButton("Trapezoidal", &profiler, 0); ImGui::SameLine();
         ImGui::RadioButton("S curve", &profiler, 1);
 
-        if (profiler == 0) {
+        if (profiler == 0.0f) {
             Jerk = 0.0f;
         }
 
-        if (Acceleration == 0) {
-                Acceleration = .1;
+        if (Acceleration == 0.0f) {
+                Acceleration = .0001f;
         }
 
-        ImGui::Text("");
+        if (Velocity == 0.0f) {
+            Velocity = .0001f; 
+        }
 
+     
         ImGui::PushID(2);
         ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(4 / 7.0f, 0.6f, 0.6f));
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(4 / 7.0f, 0.7f, 0.7f));
@@ -507,24 +612,27 @@ namespace MyApp
         static ImGuiInputFlags route_type = ImGuiInputFlags_RouteAlways;
         ImGuiInputFlags flags = route_type | route_options; // Merged flags
 
+      
+        render_a_space(1); 
+        ImGui::Text("Simulation: ");
         ImGui::SetNextItemShortcut(ImGuiKey_F5, flags); 
-        run_simulation = ImGui::Button("RUN");     
+        run_simulation = ImGui::Button("RUN",ImVec2(ImGui::GetWindowWidth()*.9f, 25.0f));     
          
         ImGui::PopStyleColor(3);
         ImGui::PopID();
 
-        ImGui::Text(""); 
+        render_a_space(1);
         ImGui::Text("Conversion calculator"); 
         ConversionCalculator(); 
         ImGui::End();
     }
 
-    void RenderCharts() {
+    void MakeTheMaths() {
         if (run_simulation || opened_file) {
             auto start = std::chrono::high_resolution_clock::now();
 
             //std::cout << "\nPath: " << current_path; 
-            if (Desacceleration == 0) {
+            if (Desacceleration == 0.0f) {
                 Desacceleration = Acceleration;
             }
 
@@ -537,8 +645,8 @@ namespace MyApp
             accel.clear();
             time_vector.clear();
 
-            max_velocity = 0;
-            max_acceleration = 0;
+            max_velocity = 0.0f;
+            max_acceleration = 0.0f;
 
             if (profiler == 0) {
                 Profiler_calculations(TrapezoidalProfile);
@@ -558,21 +666,24 @@ namespace MyApp
 
             snprintf(bufferSimulation, 32, " Total time: (msec) %.3f ", simulation_time);
         }
+    }
 
+    void RenderCharts() {
+        
         ImPlot::SetNextAxisToFit(ImAxis_X1);
         if (ImPlot::BeginPlot("Velocity Chart")) {
             ImPlot::SetupAxes("Time(s)", "Velocity(m/s)");
             ImPlot::SetupAxisLimits(ImAxis_Y1, vel_axis_min, vel_axis_max, ImPlotCond_Always);
-            ImPlot::SetNextLineStyle(ImVec4(0, 0, 1, 1), 5.0f);
+            ImPlot::SetNextLineStyle(ImVec4(0.0f, 0.0f, 1.0f, 1.0f), 5.0f);
             ImPlot::PlotLine("Velocity", time_vector.data(), vel.data(), time_vector.size());
             ImPlot::EndPlot();
         }
 
         ImPlot::SetNextAxisToFit(ImAxis_X1);
         if (ImPlot::BeginPlot("Acceleration Chart")) {
-            ImPlot::SetupAxes("Time(s)", "Acceleration(m/s^2)");
+            ImPlot::SetupAxes("Time(s)", "Acceleration(m/s2)");
             ImPlot::SetupAxisLimits(ImAxis_Y1, accel_axis_min, accel_axis_max, ImPlotCond_Always);
-            ImPlot::SetNextLineStyle(ImVec4(1, 0, 0, 1), 5.0f);
+            ImPlot::SetNextLineStyle(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), 5.0f);
             ImPlot::PlotLine("Acceleration", time_vector.data(), accel.data(), time_vector.size());
             ImPlot::EndPlot();
         }
@@ -830,6 +941,7 @@ namespace MyApp
         }
 
         RenderParametersView();
+        MakeTheMaths();
         RenderSimulation();
         RenderTerminal(); 
         opened_file = false; 
