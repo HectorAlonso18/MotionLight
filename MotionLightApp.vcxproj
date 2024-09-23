@@ -144,6 +144,7 @@
     <ClInclude Include="MotionLight\Application.h" />
     <ClInclude Include="MotionLight\ConversionCalculator.h" />
     <ClInclude Include="MotionLight\LinearMotionProfile.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui.cpp" />
@@ -160,6 +161,15 @@
     <ClCompile Include="MotionLight\ConversionCalculator.cpp" />
     <ClCompile Include="MotionLight\LinearMotionProfile.cpp" />
     <ClCompile Include="MotionLight\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\logo.ico">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
