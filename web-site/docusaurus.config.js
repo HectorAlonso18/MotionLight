@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'MotionLight',
   tagline: 'Lineal Motion profile generator',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo_motion_light.ico',
 
   // Set the production url of your site here
   url: 'https://HectorAlonso18.github.io',
@@ -77,7 +77,7 @@ const config = {
         title: 'MotionLight',
         logo: {
           alt: '',
-          src: 'img/logo.svg',
+          src: 'img/blue_motion_light.svg',
         },
         items: [
           {
