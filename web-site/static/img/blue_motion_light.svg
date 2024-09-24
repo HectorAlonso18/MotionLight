@@ -1,0 +1,13 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+	<title>logo_fondo_azul_letra_blanca</title>
+	<style>
+		tspan { white-space:pre } 
+		.s0 { fill: #318be5 } 
+		.t1 { font-size: 66px;fill: #f1f1f2;font-weight: 400;font-family: "Versa-Versa", "Versa Versa" } 
+	</style>
+	<path id="Background" class="s0" d="m256 0v256h-256v-256z"/>
+	<text id="ML" style="transform: matrix(2.307,0,0,2.383,227.67,182.607)" >
+		<tspan x="-89.8" y="0" class="t1">M</tspan><tspan  y="0" class="t1">L</tspan><tspan  y="0" class="t1">
+</tspan>
+	</text>
+</svg>
