@@ -1,5 +1,5 @@
 ---
-sidebar_label: What it is a Motion Profile? 
+sidebar_label: What is a Motion Profile? 
 sidebar_position: 1
 ---
 

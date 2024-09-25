@@ -4,7 +4,9 @@ sidebar_position: 1
 
 # MotionLight
 
-**MotionLight** is a light ``C++`` application developed using ``Dear ImGui`` to simulate and generate lineal motion profiles. Just like Trapezoidal and S-Curve profilers. 
+**MotionLight** is a light (668 KB) ``C++`` application developed using [Dear ImGui](https://github.com/ocornut/imgui) to simulate and generate lineal motion profiles. Just like Trapezoidal and S-Curve profilers. 
+
+![MotionLight](/img/full_app_charts.png)
 
 >Motion control engineers spend hours optimizing tuning parameters for their servo-based motion controllers. But what if they are using step motors? And what if, no matter how much time they spend on tuning, they can’t get the performance they want?
 >The answer, for many motor and control systems, is to focus on the motion profile instead.
@@ -31,15 +33,19 @@ At this moment, MotionLight is just available for Windows.
 ---
 
 ## Installation
+How to install MotionLight can be found [here](/MotionLight/docs/Getting-Started/Installation). 
 
 ---
 
 ## Tutorials
+MotionLight Tutorials can be found [here](/MotionLight/docs/category/tutorials).
 
 ---
 
 ## Future Work
-I am hoping to introduce more lineal motion profiles, also creating a stable version of MotionLight in Linux and MacOs. 
+* Introducing more lineal motion profiles. 
+* MotionLight on [GNU/Linux](https://es.wikipedia.org/wiki/GNU/Linux). 
+* MotionLight on [MacOS](https://es.wikipedia.org/wiki/MacOS). 
 
 ---
 
@@ -49,3 +55,4 @@ Feel free to email me at ``hector_alonso_ibarra@outlook.com``. Or open a github 
 ---
 
 ## License
+This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, you can obtain one at http://mozilla.org/MPL/2.0/.
