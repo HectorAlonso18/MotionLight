@@ -129,6 +129,8 @@ Choose where to save the ``motion.light`` file.
 ![File Explorer motionlight](/img/file_explorer_txt.png)
 
 A ``motion.light`` file looks like: 
+The first line are motion profile´s parameters: ``Profiler(Trapezoidal= 0, Scurve = 1),Velocity, Acceleration, Desacceleration, Jerk, Distance, SampleTime``. The other lines are the velocity along the profiler. 
+
 ![Motion_Light_file](/img/Motion_light_txt_file.png)
 
 ### Opening a ``motion.light`` file in MotionLight
