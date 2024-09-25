@@ -314,10 +314,7 @@ namespace MyApp
 
         }
         total_time = Profile.getTotalTime();
-        pos.push_back(Distance);
-        vel.push_back(0.0f);
-        accel.push_back(0.0f);
-        time_vector.push_back(total_time); 
+
         vel_axis_max = max_velocity + 1.0f;
         vel_axis_min = min_velocity - 1.0f;
 
