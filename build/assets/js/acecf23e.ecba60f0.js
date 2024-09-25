@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkweb_site=self.webpackChunkweb_site||[]).push([[1903],{1912:t=>{t.exports=JSON.parse('{"blogBasePath":"/MotionLight/blog","blogTitle":"Blog","authorsListPath":"/MotionLight/blog/authors"}')}}]);
