@@ -489,6 +489,10 @@ namespace MyApp
             render_a_space(1);
             ImGui::Text(angular_conversion);  ImGui::SameLine();  ImGui::Text(" m/s");
 
+            if (ImGui::Button("Copy Velocity")) {
+                ImGui::SetClipboardText(angular_conversion);
+            }
+
             ImGui::EndTabItem(); 
         }
 
@@ -799,7 +803,6 @@ namespace MyApp
 
         
         if (ImGui::Button("Copy Array to clipboard")) {
-            std::string clipboard = "";
             ImGui::SetClipboardText(ArrayOutput.get()); 
         }
 
