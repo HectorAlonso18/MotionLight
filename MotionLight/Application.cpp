@@ -907,7 +907,7 @@ namespace MyApp
                     welcome = true; 
                     
                 }
-                if (ImGui::MenuItem("Wiki")) {
+                if (ImGui::MenuItem("Tutorials")) {
                     wiki = true; 
                 }
                 if (ImGui::MenuItem("About")) {
@@ -921,22 +921,22 @@ namespace MyApp
   
         }
 
-        
+
         if (welcome) {
-            
-            welcome = false; // Reseteamos el flag para que no se siga abriendo en cada frame
+            ShellExecuteA(0,"open", "https://hectoralonso18.github.io/MotionLight/", 0, 0, SW_SHOW);
+            welcome = false; 
         }
 
-        
         // Ventana "Wiki"
         if (wiki) {
-            ShellExecuteA(0, "open", "https://hectoralonso18.github.io/Lightninglib/docs/intro", 0, 0, SW_SHOW); 
+            ShellExecuteA(0, "open", "https://hectoralonso18.github.io/MotionLight/docs/category/tutorials", 0, 0, SW_SHOW); 
             wiki = false; // Reseteamos el flag
         }        
 
         // Ventana "About"
         if (about) {
-            ImGui::OpenPopup("About");
+            ShellExecuteA(0, "open", "https://hectoralonso18.github.io/MotionLight/docs/intro", 0, 0, SW_SHOW);
+
             about = false; // Reseteamos el flag
         }
 
