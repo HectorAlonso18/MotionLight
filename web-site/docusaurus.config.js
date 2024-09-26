@@ -74,7 +74,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/motion_light_social_card.png',
+      image: 'img/motion_light_social_card_.png',
       navbar: {
         title: 'MotionLight',
         logo: {
