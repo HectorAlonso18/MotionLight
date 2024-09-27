@@ -1,5 +1,5 @@
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 # MotionLight
-
 **MotionLight** is a light (668 KB) ``C++`` application developed using [Dear ImGui](https://github.com/ocornut/imgui) to simulate and generate lineal motion profiles. Just like Trapezoidal and S-Curve profilers. 
 
 
