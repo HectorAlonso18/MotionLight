@@ -319,7 +319,7 @@ namespace MyApp
         vel_axis_min = min_velocity - 1.0f;
 
         accel_axis_max = max_acceleration + 1.0f;
-        accel_axis_min = max_acceleration - 3.0f;
+        accel_axis_min = min_acceleration - 3.0f;
     }
 
     void ConversionCalculator() {
