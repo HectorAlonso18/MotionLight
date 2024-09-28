@@ -315,11 +315,30 @@ namespace MyApp
         }
         total_time = Profile.getTotalTime();
 
-        vel_axis_max = max_velocity + 1.0f;
-        vel_axis_min = min_velocity - 1.0f;
+        float proporcion_axis_vel;
+        float proporcion_axis_accel; 
 
-        accel_axis_max = max_acceleration + 1.0f;
-        accel_axis_min = min_acceleration - 3.0f;
+        if (max_velocity < 5) {
+            proporcion_axis_vel = 1.0f; 
+        }
+
+        else {
+            proporcion_axis_vel = 0.20f; 
+        }
+
+        vel_axis_max = max_velocity + proporcion_axis_vel;
+        vel_axis_min = min_velocity - proporcion_axis_vel;
+
+        if (max_acceleration < 5) {
+            proporcion_axis_accel = 1.0f; 
+        }
+
+        else {
+            proporcion_axis_accel = 0.20f; 
+        }
+
+        accel_axis_max = max_acceleration + proporcion_axis_accel;
+        accel_axis_min = min_acceleration - proporcion_axis_accel;
     }
 
     void ConversionCalculator() {
